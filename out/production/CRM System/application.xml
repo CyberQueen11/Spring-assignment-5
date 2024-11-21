@@ -1,12 +1,22 @@
-<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:aop="http://www.springframework.org/schema/aop"
-       xmlns="http://www.springframework.org/schema/beans"
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xsi:schemaLocation="
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-	   xsi:schemaLocation=
-			   "http://www.springframework.org/schema/aop
-http://www.springframework.org/schema/aop/spring-aop.xsd
-http://www.springframework.org/schema/beans
-http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- Transaction Configuration -->
+	<tx:annotation-driven/>
+
+	<!-- Transaction Manager -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
 
     <!-- Advice -->
     <bean id="performanceTimingAdvice"
@@ -40,14 +50,14 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
 		<constructor-arg ref="jdbcTemplate"/>
 	</bean>
 
-	<bean id="customerServiceTarget" class="com.yrgo.services.customers.CustomerManagementServiceProductionImpl">
+	<bean id="customerService" class="com.yrgo.services.customers.CustomerManagementServiceProductionImpl">
 		<constructor-arg ref="customerDao"> </constructor-arg>
 	</bean>
 
 	<bean id="diaryManagementService" class="com.yrgo.services.diary.DiaryManagementServiceMockImpl"></bean>
 
 	<bean id="callHandlingService" class="com.yrgo.services.calls.CallHandlingServiceImpl">
-		<constructor-arg ref="customerServiceTarget"/>
+		<constructor-arg ref="customerService"/>
 		<constructor-arg ref="diaryManagementService"/>
 	</bean>
 </beans>

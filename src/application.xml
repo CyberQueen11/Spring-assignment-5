@@ -50,14 +50,14 @@
 		<constructor-arg ref="jdbcTemplate"/>
 	</bean>
 
-	<bean id="customerServiceTarget" class="com.yrgo.services.customers.CustomerManagementServiceProductionImpl">
+	<bean id="customerService" class="com.yrgo.services.customers.CustomerManagementServiceProductionImpl">
 		<constructor-arg ref="customerDao"> </constructor-arg>
 	</bean>
 
 	<bean id="diaryManagementService" class="com.yrgo.services.diary.DiaryManagementServiceMockImpl"></bean>
 
 	<bean id="callHandlingService" class="com.yrgo.services.calls.CallHandlingServiceImpl">
-		<constructor-arg ref="customerServiceTarget"/>
+		<constructor-arg ref="customerService"/>
 		<constructor-arg ref="diaryManagementService"/>
 	</bean>
 </beans>

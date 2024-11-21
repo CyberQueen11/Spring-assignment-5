@@ -3,11 +3,13 @@ package com.yrgo.services.customers;
 import com.yrgo.dataaccess.CustomerDao;
 import com.yrgo.domain.Call;
 import com.yrgo.domain.Customer;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Transactional
+@Service("customerService")
+@Transactional(rollbackFor = {CustomerNotFoundException.class})
 public class CustomerManagementServiceProductionImpl implements CustomerManagementService {
     private CustomerDao dao;
 

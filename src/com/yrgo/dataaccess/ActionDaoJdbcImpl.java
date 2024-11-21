@@ -10,7 +10,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.yrgo.domain.Action;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class ActionDaoJdbcImpl implements ActionDao {
 
 	private static final String DELETE_SQL = "DELETE FROM ACTION WHERE ACTION_ID=?";
