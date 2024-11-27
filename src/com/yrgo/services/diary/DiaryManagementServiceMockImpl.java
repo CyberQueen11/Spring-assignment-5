@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service("diaryManagementService")
-@Transactional(propagation = Propagation.REQUIRES_NEW)
+@Transactional(propagation= Propagation.REQUIRES_NEW)
 public class DiaryManagementServiceMockImpl implements DiaryManagementService {
 	
 	private Set<Action>allActions= new HashSet<Action>();

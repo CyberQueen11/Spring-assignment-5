@@ -46,10 +46,8 @@ public class SimpleClient {
 			for (Action next : incompleteActions) {
 				System.out.println(next);
 			}
-
-		}finally {
-
-			container.close();
+		} finally {
+		container.close();
 		}
 	}
 }
